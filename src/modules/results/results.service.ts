@@ -99,17 +99,18 @@ export class ResultsService {
     //   { $limit: 10 }
     // ], { allowDiskUse: true })
 
-    return await this.resultModel.aggregate([{
-      $match: {
-        subject_id: { $in: ["toan", "vat_li", "hoa_hoc"] }
-      }
-    },
-    {
-      $group: {
-        _id: "$candidate_id",
-        scores: { $push: { "subject": "$subject_id", "score": "$score" } },
-      }
-    }
+    return await this.resultModel.aggregate([
+      {
+        $match: {
+          subject_id: { $in: ["toan", "vat_li", "hoa_hoc"] }
+        }
+      },
+      {
+        $group: {
+          _id: "$candidate_id",
+          totalScore: { $sum: "$score" },
+        }
+      },
     ])
 
   }
