@@ -77,25 +77,40 @@ export class ResultsService {
   }
 
   async getTop10AGroup() {
-    return await this.resultModel.aggregate([
-      {
-        $match: {
-          subject_id: { $in: ["toan", "vat_li", "hoa_hoc"] }
-        }
-      },
-      {
-        $group: {
-          _id: "$candidate_id",
-          totalScore: { $sum: "$score" },
-          scores: { $push: { "subject": "$subject_id", "score": "$score" } },
 
-        },
+    //poor that mongodb atlat for free does not support allowDiskUse for this aggregation
+    // return await this.resultModel.aggregate([
+    //   {
+    //     $match: {
+    //       subject_id: { $in: ["toan", "vat_li", "hoa_hoc"] }
+    //     }
+    //   },
+    //   {
+    //     $group: {
+    //       _id: "$candidate_id",
+    //       totalScore: { $sum: "$score" },
+    //       scores: { $push: { "subject": "$subject_id", "score": "$score" } },
 
-      },
+    //     },
 
-      { $sort: { totalScore: -1 } },
-      { $limit: 10 }
-    ]).option({ allowDiskUse: true })
+    //   },
+
+    //   { $sort: { totalScore: -1 } },
+    //   { $limit: 10 }
+    // ], { allowDiskUse: true })
+
+    return await this.resultModel.aggregate([{
+      $match: {
+        subject_id: { $in: ["toan", "vat_li", "hoa_hoc"] }
+      }
+    },
+    {
+      $group: {
+        _id: "$candidate_id",
+        scores: { $push: { "subject": "$subject_id", "score": "$score" } },
+      }
+    }
+    ])
 
   }
 
