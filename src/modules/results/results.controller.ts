@@ -6,18 +6,12 @@ export class ResultsController {
   constructor(private readonly resultsService: ResultsService) { }
 
 
-  @Get()
-  findAll() {
-    return this.resultsService.findAll();
+  @Get(':registration_number')
+  async getByRegistrationNumber(@Param('registration_number') registration_number: string) {
+    return this.resultsService.findByRegistrationNumber(registration_number);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.resultsService.findOne(+id);
-  }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.resultsService.remove(+id);
-  }
+
+
 }

@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CandidatesModule } from '@/modules/candidates/candidates.module';
 import { ResultsModule } from '@/modules/results/results.module';
 import { SubjectsModule } from '@/modules/subjects/subjects.module';
+import { ResultsService } from './modules/results/results.service';
 
 @Module({
   imports: [

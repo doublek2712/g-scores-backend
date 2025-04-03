@@ -15,8 +15,4 @@ export class CandidatesController {
     return this.candidatesService.findOne(+id);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.candidatesService.remove(+id);
-  }
 }

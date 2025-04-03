@@ -11,8 +11,4 @@ export class CandidatesService {
     return `This action returns a #${id} candidate`;
   }
 
-
-  remove(id: number) {
-    return `This action removes a #${id} candidate`;
-  }
 }

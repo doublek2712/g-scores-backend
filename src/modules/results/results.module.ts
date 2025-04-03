@@ -8,5 +8,6 @@ import { Result, ResultSchema } from './schemas/result.schema';
   imports: [MongooseModule.forFeature([{ name: Result.name, schema: ResultSchema }])],
   controllers: [ResultsController],
   providers: [ResultsService],
+  exports: [ResultsService],
 })
 export class ResultsModule { }
