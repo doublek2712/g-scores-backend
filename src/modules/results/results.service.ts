@@ -95,7 +95,7 @@ export class ResultsService {
 
       { $sort: { totalScore: -1 } },
       { $limit: 10 }
-    ]).allowDiskUse(true)
+    ]).option({ allowDiskUse: true })
 
   }
 
